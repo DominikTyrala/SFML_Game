@@ -1,5 +1,5 @@
-#ifndef TEXTURE_HOLDER
-#define TEXTURE_HOLDER
+#ifndef RESOURCE_HOLDER
+#define RESOURCE_HOLDER
 
 #include <map>
 #include <memory>
@@ -15,11 +15,13 @@ namespace Textures {
 			std::map<Identifier, std::unique_ptr<Resource>> mResourceMap;
 
 		public:
+			template <typename Parameter>
+			void load(Identifier id, const std::string &filename, const Parameter &secondParam);
 			void load(Identifier id, const std::string &filename);
 			Resource& get(Identifier id);
 			const Resource& get(Identifier id) const;
 	};
 }
 
-#endif // !TEXTURE_HOLDER
+#endif // !RESOURCE_HOLDER
 

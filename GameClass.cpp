@@ -1,10 +1,16 @@
 #include "GameClass.h"
 
-Game::Game() : mWindow(sf::VideoMode(640, 480), "SFML Application"), mTexture(), mPlayer() {
+Game::Game() : mWindow(sf::VideoMode(640, 480), "SFML Application"), mTexture(), lTexture(), mPlayer(), mLandscape(){
 	if (!mTexture.loadFromFile("C:/Users/jz1clv/Documents/visual studio 2015/Projects/SFML_GAME_V2/SFML_GAME_V2/Images/Eagle.png")) {
 		//TO DO if file has not been loaded properly
 	}
 	mPlayer.setTexture(mTexture);
+
+	if (!lTexture.loadFromFile("C:/Users/jz1clv/Documents/visual studio 2015/Projects/SFML_GAME_V2/SFML_GAME_V2/Images/Desert.png")) {
+		//TO DO if file has not been loaded properly
+	}
+	mLandscape.setTexture(lTexture);
+
 	mPlayer.setPosition(100.f, 100.f);
 }
 
@@ -67,11 +73,12 @@ void Game::update(sf::Time deltaTime) {
 	if (mIsMovingRight)
 		movement.x += 1.f;
 
-	mPlayer.move(movement * deltaTime.asSeconds());
+	mPlayer.move(movement); //* deltaTime.asSeconds()
 }
 
 void Game::render() {
 	mWindow.clear();
+	mWindow.draw(mLandscape);
 	mWindow.draw(mPlayer);
 	mWindow.display();
 }

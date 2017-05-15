@@ -1,4 +1,4 @@
-#include "TextureHolder.h"
+#include "ResourceHolder.h"
 
 namespace Textures {
 
@@ -26,7 +26,7 @@ namespace Textures {
 	}
 
 	template <typename Resource, typename Identifier>
-	Resource& ResourceHolder::get(Identifier id) {
+	Resource& ResourceHolder<Resource,Identifier>::get(Identifier id) {
 		auto found = mResourceMap.find(id);
 		assert(found != mResourceMap.end());
 
@@ -34,13 +34,10 @@ namespace Textures {
 	}
 
 	template <typename Resource, typename Identifier>
-	const Resource& ResourceHolder::get(Identifier id) const {
+	const Resource& ResourceHolder<Resource, Identifier>::get(Identifier id) const {
 		auto found = mResourceMap.find(id);
 		assert(found != mResourceMap.end());
 
 		return *found->second;
 	}
-
-
-
 }

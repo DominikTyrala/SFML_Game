@@ -16,7 +16,10 @@ private:
 private:
 	sf::RenderWindow mWindow;
 	sf::Texture mTexture;
+	sf::Texture lTexture;
+
 	sf::Sprite mPlayer;
+	sf::Sprite mLandscape;
 	const sf::Time TimePerFrame = sf::seconds(1.f / 60.f);
 
 	bool mIsMovingUp = false;
