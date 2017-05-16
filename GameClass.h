@@ -1,6 +1,8 @@
 #ifndef GAME_CLASS
 #define GAME_CLASS
+
 #include <SFML/Graphics.hpp>
+#include <iostream>
 
 class Game {
 public:

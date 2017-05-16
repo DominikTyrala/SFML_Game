@@ -7,7 +7,7 @@
 #include <cassert>
 
 namespace Textures {
-	enum ID {Landscape, Airplane, Missile};
+	//enum ID {Landscape, Airplane, Missile};
 
 	template <typename Resource, typename Identifier>
 	class ResourceHolder {

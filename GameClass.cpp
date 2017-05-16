@@ -1,6 +1,7 @@
 #include "GameClass.h"
 
 Game::Game() : mWindow(sf::VideoMode(640, 480), "SFML Application"), mTexture(), lTexture(), mPlayer(), mLandscape(){
+
 	if (!mTexture.loadFromFile("C:/Users/jz1clv/Documents/visual studio 2015/Projects/SFML_GAME_V2/SFML_GAME_V2/Images/Eagle.png")) {
 		//TO DO if file has not been loaded properly
 	}
