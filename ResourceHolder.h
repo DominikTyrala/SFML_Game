@@ -4,24 +4,61 @@
 #include <map>
 #include <memory>
 #include <SFML/Graphics.hpp>
+#include <stdexcept>
 #include <cassert>
-
-namespace Textures {
-	//enum ID {Landscape, Airplane, Missile};
 
 	template <typename Resource, typename Identifier>
 	class ResourceHolder {
-		private:
-			std::map<Identifier, std::unique_ptr<Resource>> mResourceMap;
-
 		public:
+			void load(Identifier id, const std::string &filename);
+
 			template <typename Parameter>
 			void load(Identifier id, const std::string &filename, const Parameter &secondParam);
-			void load(Identifier id, const std::string &filename);
+			
 			Resource& get(Identifier id);
 			const Resource& get(Identifier id) const;
+		private:
+			std::map<Identifier, std::unique_ptr<Resource>> mResourceMap;
 	};
-}
+
+	//regular resource load just like textures etc
+	template <typename Resource, typename Identifier>
+	void ResourceHolder<Resource, Identifier>::load(Identifier id, const std::string &filename) {
+		std::unique_ptr<Resource> resource(new Resource());
+		if (!resource->loadFromFile(filename))
+			throw std::runtime_error("TextureHolder::load - Failed to load " + filename);
+
+		auto inserted = mResourceMap.insert(std::make_pair(id, std::move(resource)));
+		assert(inserted.second);
+	}
+
+	//music load, has to have an additional parameter
+	template <typename Resource, typename Identifier>
+	template <typename Parameter>
+	void ResourceHolder<Resource, Identifier>::load(Identifier id, const std::string &filename, const Parameter& secondParam) {
+		std::unique_ptr<Resource> resource(new Resource());
+		if (!resource->loadFromFile(filename, secondParam))
+			throw std::runtime_error("TextureHolder::load - Failed to load " + filename);
+
+		auto inserted = mResourceMap.insert(std::make_pair(id, std::move(resource)));
+		assert(inserted.second);
+	}
+
+	template <typename Resource, typename Identifier>
+	Resource& ResourceHolder<Resource, Identifier>::get(Identifier id) {
+		auto found = mResourceMap.find(id);
+		assert(found != mResourceMap.end());
+
+		return *found->second;
+	}
+
+	template <typename Resource, typename Identifier>
+	const Resource& ResourceHolder<Resource, Identifier>::get(Identifier id) const {
+		auto found = mResourceMap.find(id);
+		assert(found != mResourceMap.end());
+
+		return *found->second;
+	}
 
 #endif // !RESOURCE_HOLDER
 

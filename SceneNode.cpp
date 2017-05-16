@@ -19,6 +19,10 @@ SceneNode::Ptr SceneNode::detachChild(const SceneNode& node) {
 	return result;
 }
 
+void SceneNode::drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const {
+	//do nothing
+}
+
 void SceneNode::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 	states.transform *= getTransform();
 

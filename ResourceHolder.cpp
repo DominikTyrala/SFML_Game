@@ -1,6 +1,4 @@
-#include "ResourceHolder.h"
-
-namespace Textures {
+/*
 
 	//regular resource load just like textures etc
 	template <typename Resource, typename Identifier>
@@ -26,7 +24,7 @@ namespace Textures {
 	}
 
 	template <typename Resource, typename Identifier>
-	Resource& ResourceHolder<Resource,Identifier>::get(Identifier id) {
+	Resource& ResourceHolder<Resource, Identifier>::get(Identifier id) {
 		auto found = mResourceMap.find(id);
 		assert(found != mResourceMap.end());
 
@@ -40,4 +38,5 @@ namespace Textures {
 
 		return *found->second;
 	}
-}
+
+	*/
